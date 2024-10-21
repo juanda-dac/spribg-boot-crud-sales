@@ -38,4 +38,10 @@ public class Sale {
         this.totalVenta = totalVenta;
         this.valorVenta = valorVenta;
     }
+
+    @Override
+    public String toString() {
+        return "Sale [client=" + client.toString() + ", id=" + id + ", ivaVenta=" + ivaVenta + ", totalVenta="
+                + totalVenta + ", user=" + user.toString() + ", valorVenta=" + valorVenta + "]";
+    }
 }

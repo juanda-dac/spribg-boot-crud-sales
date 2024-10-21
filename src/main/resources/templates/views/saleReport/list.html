@@ -18,7 +18,7 @@
             }
         }
     </script>
-    <title>Lista de Ventas</title>
+    <title>Reporte de Ventas</title>
 </head>
 <body class="font-montserrat">
     <nav class="w-100 bg-gray-200 flex justify-center">
@@ -36,10 +36,10 @@
             <li class="p-2">
                 <a class="text-dark font-medium" href="/products/">Productos</a>
             </li>
-            <li class="p-2 border-b-2 border-black">
+            <li class="p-2">
                 <a class="text-dark font-medium" href="/sales/">Ventas</a>
             </li>
-            <li class="p-2">
+            <li class="p-2 border-b-2 border-black">
                 <a class="text-dark font-medium" href="/reports/">Reportes</a>
             </li>
         </ul>
@@ -50,38 +50,39 @@
             Lista de Ventas
         </h1>
         <div class="flex justify-center">
-            <a href="new" class="p-4 bg-cyan-600 text-white rounded-lg">Generar una nueva venta</a>
+            <a href="new" class="p-4 bg-cyan-600 text-white rounded-lg">Generar un nuevo reporte</a>
         </div>
         <div id="table" class="w-full flex justify-center">
             <table class="table-auto border-collapse">
                 <thead>
                     <tr>
                         <th class="border border-gray-300 font-medium p-2">ID</th>
-                        <th class="border border-gray-300 font-medium p-2">Cliente</th>
-                        <th class="border border-gray-300 font-medium p-2">Usuario</th>
-                        <th class="border border-gray-300 font-medium p-2">IVA</th>
-                        <th class="border border-gray-300 font-medium p-2">Total Venta</th>
+                        <th class="border border-gray-300 font-medium p-2">Producto</th>
+                        <th class="border border-gray-300 font-medium p-2">Venta</th>
+                        <th class="border border-gray-300 font-medium p-2">Cantidad</th>
+                        <th class="border border-gray-300 font-medium p-2">Total</th>
                         <th class="border border-gray-300 font-medium p-2">Valor venta</th>
+                        <th class="border border-gray-300 font-medium p-2">Valor con IVA</th>
                         <th class="border border-gray-300 font-medium p-2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="sale : ${sales}" class="odd:bg-gray-100">
-                        <td class="border border-gray-300 p-2" th:text="${sale.id}"></td>
-                        <td class="border border-gray-300 p-2" th:text="${sale.client.nombrecompleto}"></td>
-                        <td class="border border-gray-300 p-2" th:text="${sale.user.nombreUsuario}"></td>
-                        <td class="border border-gray-300 p-2" th:text="${sale.ivaVenta}"></td>
-                        <td class="border border-gray-300 p-2" th:text="${sale.totalVenta}"></td>
-                        <td class="border border-gray-300 p-2" th:text="${sale.valorVenta}"></td>
+                    <tr th:each="saleReport : ${saleReports}" class="odd:bg-gray-100">
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.id}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.producto.nombre}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.venta.id}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.cantidadProducto}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.valorTotal}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.valorVenta}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.valorIva}"></td>
                         <td class="border border-gray-300 p-2">
-                            <a th:href="@{'/reports/sale/' + ${sale.id}}" class="p-2 bg-blue-500 text-white rounded-lg">Reporte</a>
+                            <a th:href="@{'list/' + ${saleReport.id}}" class="p-2 bg-blue-500 text-white rounded-lg">Editar</a>
                             &nbsp;
-                            <a th:href="@{'list/' + ${sale.id}}" class="p-2 bg-blue-500 text-white rounded-lg">Editar</a>
-                            &nbsp;
-                            <a th:href="@{'delete/' + ${sale.id}}" class="p-2 bg-red-500 text-white rounded-lg">Eliminar</a>
+                            <a th:href="@{'delete/' + ${saleReport.id}}" class="p-2 bg-red-500 text-white rounded-lg">Eliminar</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
+                </tbody>
             </table>
         </div>
     </div>

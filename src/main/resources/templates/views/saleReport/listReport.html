@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Reporte de venta</title>
+</head>
+<body class="font-montserrat">
+
+    <div class="w-full flex flex-col">
+        <h1 class="font-bold text-2xl text-center" th:text="'Reporte venta ' + ${sale.id}"></h1>
+        <div id="table" class="w-full flex justify-center">
+            <table class="table-auto border-collapse">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 font-medium p-2">ID</th>
+                        <th class="border border-gray-300 font-medium p-2">Producto</th>
+                        <th class="border border-gray-300 font-medium p-2">Cantidad</th>
+                        <th class="border border-gray-300 font-medium p-2">Valor Unitario</th>
+                        <th class="border border-gray-300 font-medium p-2">Valor sin IVA</th>
+                        <th class="border border-gray-300 font-medium p-2">IVA</th>
+                        <th class="border border-gray-300 font-medium p-2">Valor con IVA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="saleReport : ${saleReports}">
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.id}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.producto.nombre}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.cantidadProducto}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.producto.precioVenta}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.valorVenta}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.valorIva}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${saleReport.valorTotal}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex flex-col">
+            <span class="font-bold text-xl text-center">IVA: <span class="font-light text-xl" th:text="'$'+${sale.ivaVenta}"></span></span>
+            <span class="font-bold text-xl text-center">Total sin IVA: <span class="font-light text-xl" th:text="'$'+${sale.valorVenta}"></span></span>
+            <span class="font-bold text-xl text-center">Total: <span class="font-light text-xl" th:text="'$'+${sale.totalVenta}"></span></span>
+        </div>
+
+    </div>
+    
+</body>
+</html>
