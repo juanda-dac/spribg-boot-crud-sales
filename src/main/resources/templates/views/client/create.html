@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create client</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-montserrat">
+    <div class="w-full flex">
+        <div class="w-[70%] mx-auto flex justify-center">
+            <form action="#" th:object="${client}" class="w-[50%] flex flex-col gap-2" th:action="@{/client/save}" method="post">
+                <h2 class="font-bold text-3xl text-center">Crear Cliente</h2>
+                <div class="flex flex-col">
+                    <label for="nit">Cédula</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="cedula" th:field="*{cedula}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="name" th:field="*{nombrecompleto}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="city">Dirección</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="address" th:field="*{direccion}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="address">Teléfono</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="phone" th:field="*{telefono}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="phone">Correo</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="correo" th:field="*{correo}">
+                </div>
+                <div class="flex justify-center">
+                    <button type="submit" class="p-4 bg-cyan-600 text-white rounded-lg">Update</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    
+</body>
+</html>

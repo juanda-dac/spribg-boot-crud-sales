@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Crear usuario</title>
+</head>
+<body class="font-montserrat">
+    <div class="w-full flex">
+        <div class="w-[70%] mx-auto flex justify-center">
+            <form action="#" th:object="${user}" class="w-[50%] flex flex-col gap-2" th:action="@{/user/save}" method="post">
+                <h2 class="font-bold text-3xl text-center">Crear usuario</h2>
+                <div class="flex flex-col">
+                    <label for="id">ID</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="id" th:field="*{idUsuario}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="username">Nombre de usuario</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="username" placeholder="Nombre de usuario" th:field="*{nombreUsuario}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="key">Clave</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="key" placeholder="Clave" th:field="*{clave}">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="email">Correo</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="email" placeholder="Correo" th:field="*{correo}">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="userType">Tipo de usuario</label>
+                    <select id="userType" class="border border-gray-300 rounded-lg p-2 text-xl" th:field="*{tipoUsuario}">
+                        <option value="Administrador">Administrador</option>
+                        <option value="Vendedor">Vendedor</option>
+                        <option value="Cliente">Cliente</option>
+                    </select>
+                </div>
+                <div class="flex justify-center">
+                    <button type="submit" class="p-4 bg-cyan-600 text-white rounded-lg">Crear</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>

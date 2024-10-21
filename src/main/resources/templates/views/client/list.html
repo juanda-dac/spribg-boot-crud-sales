@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Lista de clientes</title>
+</head>
+<body class="font-montserrat">
+    <nav class="w-100 bg-gray-200 flex justify-center">
+        <ul class="flex py-2">
+            <!-- Menu items: Users, Clientes, Proveedores, Productos, Ventas, Reportes -->
+            <li class="p-2">
+                <a class="text-dark font-medium" href="/user/">Usuarios</a>
+            </li>
+            <li class="p-2 border-b-2 border-black">
+                <a class="text-dark font-medium" href="/client/">Clientes</a>
+            </li>
+            <li class="p-2">
+                <a class="text-dark font-medium" href="/proveedor/">Proveedores</a>
+            </li>
+            <li class="p-2">
+                <a class="text-dark font-medium" href="/products/">Productos</a>
+            </li>
+            <li class="p-2">
+                <a class="text-dark font-medium" href="/sales/">Ventas</a>
+            </li>
+            <li class="p-2">
+                <a class="text-dark font-medium" href="/reports/">Reportes</a>
+            </li>
+        </ul>
+    </nav>
+    <hr class="w-100 border border-dark" />
+    <div class="w-full flex flex-col gap-8">
+        <h1 class="text-center text-2xl font-bold">
+            Lista de Clientes
+        </h1>
+        <div class="flex justify-center">
+            <a href="new" class="p-4 bg-cyan-600 text-white rounded-lg">Crear nuevo cliente</a>
+        </div>
+        <div id="table" class="w-full flex justify-center">
+            <table class="table-auto border-collapse">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 font-medium p-2">Cédula</th>
+                        <th class="border border-gray-300 font-medium p-2">Nombre</th>
+                        <th class="border border-gray-300 font-medium p-2">Dirección</th>
+                        <th class="border border-gray-300 font-medium p-2">Telefono</th>
+                        <th class="border border-gray-300 font-medium p-2">Correo</th>
+                        <th class="border border-gray-300 font-medium p-2">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="client : ${clients}" class="odd:bg-gray-100">
+                        <td class="border border-gray-300 p-2" th:text="${client.cedula}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${client.nombrecompleto}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${client.direccion}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${client.telefono}"></td>
+                        <td class="border border-gray-300 p-2" th:text="${client.correo}"></td>
+                        <td class="border border-gray-300 p-2">
+                            <a th:href="@{'list/' + ${client.cedula}}" class="p-2 bg-blue-500 text-white rounded-lg">Editar</a>
+                            &nbsp;
+                            <a th:href="@{'delete/' + ${client.cedula}}" class="p-2 bg-red-500 text-white rounded-lg">Eliminar</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

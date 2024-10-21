@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Generar venta</title>
+</head>
+<body class="font-montserrat">
+    <div class="w-full flex">
+        <div class="w-[70%] mx-auto flex justify-center">
+            <form action="#" th:object="${sale}" class="w-[50%] flex flex-col gap-2" th:action="@{/sales/save}" method="post">
+                <h2 class="font-bold text-3xl text-center">Crear Venta</h2>
+                <div class="flex flex-col">
+                    <label for="id">ID</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="id" th:field="*{id}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="client">Cliente</label>
+                    <select name="client" id="client" class="border border-gray-300 rounded-lg p-2 text-xl" th:field="*{client}">
+                        <option th:each="client : ${clients}" th:value="${client.cedula}" th:text="${client.cedula} + ' - ' + ${client.nombrecompleto}"></option>
+                    </select>
+                </div>
+                <div class="flex flex-col">
+                    <label for="city">Usuario</label>
+                    <select name="user" id="user" class="border border-gray-300 rounded-lg p-2 text-xl" th:field="*{user}">
+                        <option th:each="user : ${users}" th:value="${user.idUsuario}" th:text="${user.idUsuario} + ' - ' + ${user.nombreUsuario}"></option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="iva">IVA</label>
+                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="iva" placeholder="IVA" th:field="*{ivaVenta}">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="saleValue">Valor Venta</label>
+                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="saleValue" placeholder="Valor" th:field="*{valorVenta}">
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="p-4 bg-cyan-600 text-white rounded-lg">Crear</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>

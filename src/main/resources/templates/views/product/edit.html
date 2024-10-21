@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Edit product</title>
+</head>
+<body class="font-montserrat">
+    <div class="w-full flex">
+        <div class="w-[70%] mx-auto flex justify-center">
+            <form action="#" th:object="${product}" class="w-[50%] flex flex-col gap-2" th:action="@{/products/save}" method="post">
+                <h2 class="font-bold text-3xl text-center">Update product</h2>
+                <div class="flex flex-col">
+                    <label for="nit">Código</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="Código" readonly th:field="*{codigo}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="border border-gray-300 rounded-lg p-2 text-xl" id="name" placeholder="Nombre" th:field="*{nombre}">
+                </div>
+                <div class="flex flex-col">
+                    <label for="city">Proveedor</label>
+                    <select id="proveedor" class="border border-gray-300 rounded-lg p-2 text-xl" th:field="*{proveedor}">
+                        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.nit}" th:text="${proveedor.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="precioCompra">Precio de Compra</label>
+                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="precioCompra" placeholder="Precio de compra" th:field="*{precioCompra}">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="iva">IVA</label>
+                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="iva" placeholder="IVA" th:field="*{iva}">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="precioVenta">Precio de venta</label>
+                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="precioVenta" placeholder="Precio de venta" th:field="*{precioVenta}">
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="p-4 bg-cyan-600 text-white rounded-lg">Update</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>
