@@ -42,6 +42,12 @@ public class SaleReportServiceImpl implements SaleReportService {
     }
 
     @Override
+    public List<SaleReport> createManySaleReports(List<SaleReport> saleReports) {
+        saleReportRepository.saveAll(saleReports);
+        return saleReports;
+    }
+
+    @Override
     public void deleteSaleReport(int id) {
         saleReportRepository.deleteById(id);
     }

@@ -15,6 +15,8 @@ public interface SaleReportService {
 
     SaleReport createSaleReport(SaleReport saleReport);
 
+    List<SaleReport> createManySaleReports(List<SaleReport> saleReports);
+
     void deleteSaleReport(int id);
 
 }

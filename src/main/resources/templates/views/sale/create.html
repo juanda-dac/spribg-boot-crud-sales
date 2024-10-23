@@ -21,8 +21,49 @@
     <title>Generar venta</title>
 </head>
 <body class="font-montserrat">
+    <!-- Modal -->
+    <div id="addProductModal" class="w-full h-screen bg-gray-500/70 flex p-2 fixed hidden">
+        <div id="modal-card" class="bg-white w-full max-w-md m-auto py-2 rounded-xl">
+            <!-- Hader modal -->
+            <div id="header" class="flex justify-between border-b border-gray-400 p-4">
+                <h2 class="font-medium text-xl text-gray-700">Agregar producto</h2>
+                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-close-modal="addProductModal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Body card -->
+            <div class="w-full p-2">
+                <form action="#" method="post" th:action="@{/sales/saveTempSaleReport}" th:object="${saleReport}" class="flex flex-col gap-2">
+                    <div class="w-full flex flex-col">
+                        <label for="product">Producto</label>
+                        <select name="product" class="p-2 border border-gray-400 rounded-lg" id="product" th:field="*{producto}">
+                            <option value="">Selecciona un producto</option>
+                            <option th:each="product : ${products}" th:value="${product.codigo}" th:text="${product.nombre}"></option>
+                        </select>
+                    </div>
+
+                    <div class="w-full flex flex-col">
+                        <label for="quantity">Cantidad</label>
+                        <input type="number" class="p-2 border border-gray-400 rounded-lg" id="quantity" th:field="*{cantidadProducto}">
+                    </div>
+
+                    <div class="w-full flex flex-col">
+                        <button type="submit" class="bg-sky-500 rounded-lg p-2 text-white font-medium">
+                            Agregar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Form & table -->
     <div class="w-full flex">
-        <div class="w-[70%] mx-auto flex justify-center">
+        <div class="w-full mx-auto flex justify-center">
             <form action="#" th:object="${sale}" class="w-[50%] flex flex-col gap-2" th:action="@{/sales/save}" method="post">
                 <h2 class="font-bold text-3xl text-center">Crear Venta</h2>
                 <div class="flex flex-col">
@@ -32,34 +73,60 @@
                 <div class="flex flex-col">
                     <label for="client">Cliente</label>
                     <select name="client" id="client" class="border border-gray-300 rounded-lg p-2 text-xl" th:field="*{client}">
+                        <option value="">Seleccione un cliente</option>
                         <option th:each="client : ${clients}" th:value="${client.cedula}" th:text="${client.cedula} + ' - ' + ${client.nombrecompleto}"></option>
                     </select>
                 </div>
                 <div class="flex flex-col">
                     <label for="city">Usuario</label>
                     <select name="user" id="user" class="border border-gray-300 rounded-lg p-2 text-xl" th:field="*{user}">
+                        <option value="">Seleccione un usuario</option>
                         <option th:each="user : ${users}" th:value="${user.idUsuario}" th:text="${user.idUsuario} + ' - ' + ${user.nombreUsuario}"></option>
                     </select>
                 </div>
 
-                <div class="flex flex-col">
-                    <label for="iva">IVA</label>
-                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="iva" placeholder="IVA" th:field="*{ivaVenta}">
-                </div>
-
-                <div class="flex flex-col">
-                    <label for="saleValue">Valor Venta</label>
-                    <input type="number" class="border border-gray-300 rounded-lg p-2 text-xl" id="saleValue" placeholder="Valor" th:field="*{valorVenta}">
-                </div>
-
-                <div class="flex justify-center">
+                <div class="flex gap-4 justify-center">
+                    <button data-modal-target="addProductModal" class="p-4 bg-cyan-600 text-white rounded-lg">Agregar</button>
                     <button type="submit" class="p-4 bg-cyan-600 text-white rounded-lg">Crear</button>
+                </div>
+
+                <div class="w-full flex flex-col justify-center" id="table">
+                    <table class="border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-400 px-2 py 4">ID</th>
+                                <th class="border border-gray-400 px-2 py 4">Nombre</th>
+                                <th class="border border-gray-400 px-2 py 4">Cant.</th>
+                                <th class="border border-gray-400 px-2 py 4">Precio Unit</th>
+                                <th class="border border-gray-400 px-2 py 4">Precio sin IVA</th>
+                                <th class="border border-gray-400 px-2 py 4">IVA</th>
+                                <th class="border border-gray-400 px-2 py 4">Precio total.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="saleReport : ${saleReports}">
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.id}"></td>
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.producto.nombre}"></td>
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.cantidadProducto}"></td>
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.producto.precioVenta}"></td>
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.valorVenta}"></td>
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.valorIva}"></td>
+                                <td class="border border-gray-400 px-2 py 4" th:text="${saleReport.valorTotal}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
 
             </form>
         </div>
 
     </div>
+
+    <div class="fixed bottom-0 w-full px-2 py-6">
+        <div class=""></div>
+    </div>
     
+    <script src="/js/modal.js"></script>
 </body>
 </html>
