@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme:{
+                extend:{
+                    fontFamily:{
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Any - Error</title>
+</head>
+<body class="font-montserrat">
+    <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100"></div>
+        <h1 class="text-6xl font-bold text-gray-800 mb-4">Error</h1>
+        <p class="text-2xl text-gray-600 mb-8">Something wrong!</p>
+        <a href="/user/" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300">Go Users page</a>
+    </div>
+</body>
+</html>

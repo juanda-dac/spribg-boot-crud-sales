@@ -1,6 +1,7 @@
 package ute.edu.java.corte2.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import ute.edu.java.corte2.service.SaleService;
 import ute.edu.java.corte2.service.UserService;
 import java.lang.Math;
 
+@ConditionalOnExpression("${app.controllers.SaleController:false}")
 @Controller
 @RequestMapping("/sales")
 public class SaleController {
